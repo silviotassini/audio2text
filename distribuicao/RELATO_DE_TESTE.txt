@@ -1,0 +1,61 @@
+RELATO DE TESTE - AUDIO2TEXT 0.3.0
+==================================
+Não inclua áudios nem trechos de transcrições de casos reais. Descreva os problemas
+de forma genérica (ex.: "inventou uma frase num trecho de silêncio de 10 s").
+
+Preencha um bloco "TESTE" para cada tipo de áudio testado.
+
+
+IDENTIFICAÇÃO
+-------------
+Perito:
+Data:
+Versão usada (completa / leve):
+Computador (Windows 10/11, memória RAM):
+Placa de vídeo (ex.: NVIDIA GTX 1050 Ti, sem placa dedicada):
+A GPU foi usada? (a tela inicial mostra "GPU: sim/não"):
+
+
+INSTALAÇÃO
+----------
+Conseguiu instalar sem ajuda? (sim / não):
+Dificuldades encontradas:
+
+
+TESTE 1
+-------
+Tipo de áudio (ex.: mensagem de WhatsApp, interceptação telefônica, depoimento,
+vídeo de câmera, ambiente com ruído):
+Formato (.mp3, .ogg, .wav...):              Duração aproximada:
+Qualidade do áudio (boa / regular / ruim):
+Idioma / sotaque:
+Número de pessoas falando:
+Modelo usado:                               Tempo de processamento:
+Opções usadas (marcação de tempo / locutores / idioma fixo):
+
+Qualidade da transcrição (1 = inútil, 5 = quase sem correções):
+Erros mais frequentes (palavras trocadas, nomes próprios, números, gírias...):
+Inventou texto inexistente no áudio? Em que situação?
+Omitiu falas? Em que situação?
+As marcações [?? ... ??] apontaram os trechos realmente duvidosos?
+  (sim / em parte / não / não apareceram):
+Identificação de locutores (se usou): atribuiu as falas corretamente?
+  (sim / em parte / não):
+Comparado à transcrição manual, economizou tempo? Quanto, aproximadamente?
+
+
+TESTE 2
+-------
+(copie o bloco acima)
+
+
+SUGESTÕES
+---------
+O que mais atrapalhou:
+
+O que mais ajudou:
+
+Recursos que gostaria de ter (ex.: exportar para Word, relatório do lote, hash dos
+arquivos, transcrever um arquivo só, outros formatos de áudio/vídeo):
+
+Outras observações:

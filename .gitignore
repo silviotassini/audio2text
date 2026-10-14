@@ -1,0 +1,13 @@
+# Ambiente e caches
+.venv/
+__pycache__/
+*.pyc
+
+# Pacotes gerados pelo distribuicao/empacotar.sh (imagens de centenas de MB)
+dist/
+
+# Material de teste e resultados: podem conter dados de casos
+tmp/
+transcricoes_*/
+*_transcricoes/
+*.log

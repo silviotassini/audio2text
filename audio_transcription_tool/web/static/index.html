@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>audio2text</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topo">
+  <div class="marca">
+    <span class="nome">audio2text</span>
+    <span class="versao" id="versao"></span>
+  </div>
+  <div class="topo-direita">
+    <span class="chip" id="chip-gpu">…</span>
+    <button class="botao secundario" id="botao-encerrar" type="button">Encerrar</button>
+  </div>
+</header>
+
+<main>
+  <section class="pastas">
+    <div>
+      <span class="rotulo">Pasta do caso</span>
+      <code id="pasta-audios"></code>
+      <span class="selo">somente leitura</span>
+    </div>
+    <div>
+      <span class="rotulo">Transcrições</span>
+      <code id="pasta-saida"></code>
+    </div>
+  </section>
+
+  <div class="aviso" id="aviso" hidden></div>
+
+  <section class="cartao" id="secao-audios">
+    <div class="cartao-topo">
+      <h2>Áudios do caso</h2>
+      <div class="acoes">
+        <button class="botao link" id="marcar-todos" type="button">Todos</button>
+        <button class="botao link" id="marcar-pendentes" type="button">Só os não transcritos</button>
+        <button class="botao link" id="marcar-nenhum" type="button">Nenhum</button>
+      </div>
+    </div>
+    <div class="tabela-rolagem">
+      <table class="tabela" id="tabela-audios">
+        <thead>
+          <tr><th class="col-marca"></th><th>Arquivo</th><th class="num">Duração</th><th class="num">Tamanho</th><th>Transcrições</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="vazio" id="audios-vazio" hidden>Nenhum áudio encontrado na pasta do caso.</p>
+    <p class="resumo" id="resumo-selecao"></p>
+  </section>
+
+  <section class="cartao" id="secao-opcoes">
+    <h2>Opções</h2>
+    <div class="grade-opcoes">
+      <label class="campo">
+        <span>Modelo</span>
+        <select id="modelo"></select>
+        <small id="modelo-descricao"></small>
+      </label>
+      <label class="campo">
+        <span>Idioma</span>
+        <select id="idioma"></select>
+        <small>O automático costuma acertar; fixe "Português" se errar.</small>
+      </label>
+      <label class="campo">
+        <span>Dispositivo</span>
+        <select id="dispositivo"></select>
+        <small id="dispositivo-info"></small>
+      </label>
+    </div>
+    <div class="grade-opcoes">
+      <label class="marca-linha">
+        <input type="checkbox" id="marcacao-tempo">
+        <span>Marcação de tempo <small>[00:01:23 - 00:01:30] em cada trecho</small></span>
+      </label>
+      <div>
+        <label class="marca-linha">
+          <input type="checkbox" id="locutores">
+          <span>Identificar locutores <small>LOCUTOR 1, LOCUTOR 2...</small></span>
+        </label>
+        <label class="campo campo-curto" id="campo-num-locutores" hidden>
+          <span>Número de locutores</span>
+          <input type="number" id="num-locutores" min="1" max="20" placeholder="automático">
+        </label>
+        <small class="indisponivel" id="locutores-indisponivel" hidden>Não disponível na versão leve.</small>
+      </div>
+    </div>
+    <div class="rodape-opcoes">
+      <p class="estimativa" id="estimativa"></p>
+      <button class="botao primario" id="botao-iniciar" type="button">Iniciar transcrição</button>
+    </div>
+  </section>
+
+  <section class="cartao" id="secao-andamento" hidden>
+    <div class="cartao-topo">
+      <h2 id="andamento-titulo">Andamento</h2>
+      <button class="botao secundario" id="botao-cancelar" type="button">Cancelar</button>
+    </div>
+    <p class="andamento-estado" id="andamento-estado"></p>
+    <div class="barra-rotulo"><span>Arquivo atual</span><span id="pct-arquivo"></span></div>
+    <div class="barra"><div id="barra-arquivo"></div></div>
+    <div class="barra-rotulo"><span>Total</span><span id="pct-total"></span></div>
+    <div class="barra"><div id="barra-total"></div></div>
+    <p class="tempos" id="tempos"></p>
+    <div class="tabela-rolagem">
+      <table class="tabela" id="tabela-resultados">
+        <thead>
+          <tr><th>Arquivo</th><th>Situação</th><th class="num">Tempo</th><th class="num">Baixa confiança</th><th class="num">Locutores</th><th></th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="resumo" id="relatorio-info"></p>
+  </section>
+
+  <section class="cartao" id="secao-transcricoes">
+    <div class="cartao-topo">
+      <h2>Transcrições do caso</h2>
+      <button class="botao link" id="copiar-saida" type="button">Copiar caminho da pasta</button>
+    </div>
+    <div class="tabela-rolagem">
+      <table class="tabela" id="tabela-transcricoes">
+        <thead>
+          <tr><th>Arquivo</th><th>Modelo</th><th>Gerado em</th><th></th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="vazio" id="transcricoes-vazio" hidden>Nenhuma transcrição ainda.</p>
+  </section>
+
+  <p class="nota">Transcrição automática: todo o conteúdo deve ser conferido com a gravação.
+    Trechos <mark class="duvida">[?? assim ??]</mark> têm baixa confiança.</p>
+</main>
+
+<div class="leitor" id="leitor" hidden>
+  <div class="leitor-caixa" role="dialog" aria-modal="true" aria-labelledby="leitor-titulo">
+    <div class="leitor-topo">
+      <h2 id="leitor-titulo"></h2>
+      <button class="botao secundario" id="leitor-fechar" type="button">Fechar</button>
+    </div>
+    <div class="leitor-conteudo" id="leitor-conteudo"></div>
+  </div>
+</div>
+
+<div class="encerrado" id="encerrado" hidden>
+  <div>
+    <h1>audio2text encerrado</h1>
+    <p>Pode fechar esta aba. Para usar de novo, execute o lançador.</p>
+  </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# Somente o código da ferramenta entra na imagem.
+.venv/
+tmp/
+dist/
+distribuicao/
+**/__pycache__/
+*.pyc
+*.log
+transcricoes_*/
+.git/
+.dockerignore
+.gitignore

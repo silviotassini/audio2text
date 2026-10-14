@@ -1,0 +1,17 @@
+# Configuração do audio2text
+# Linhas que começam com # são comentários. Não coloque espaços antes ou depois do "=".
+#
+# PASTA_AUDIOS: pasta do caso, com os áudios (as subpastas também são lidas).
+# Ela é aberta como SOMENTE LEITURA: a ferramenta não consegue alterá-la.
+# Exemplos:
+#   Windows: D:\Pericias\Caso 123\Audios
+#   Linux:   /home/fulano/pericias/caso123/audios
+PASTA_AUDIOS=
+
+# PASTA_TRANSCRICOES: onde gravar as transcrições. Não pode ficar dentro da pasta dos áudios.
+# Deixe vazio para usar uma pasta ao lado da pasta dos áudios, com "_transcricoes" no fim
+# do nome (ex.: D:\Pericias\Caso 123\Audios_transcricoes).
+PASTA_TRANSCRICOES=
+
+# PORTA: porta da página no navegador. Troque só se a 8765 já estiver em uso.
+PORTA=8765

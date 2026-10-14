@@ -1,0 +1,9 @@
+# Opcional: transcrição em GPU NVIDIA. Bibliotecas CUDA 12 e cuDNN 9 usadas pelo
+# faster-whisper, instaladas dentro do ambiente virtual (não precisa do CUDA Toolkit).
+# Versões iguais às exigidas pelo PyTorch 2.14.1+cu126 (usado na identificação de
+# locutores em GPUs Pascal), para que os dois convivam sem conflito. O cuDNN 9.10 também
+# é o último que comprovadamente suporta GPUs Pascal (GTX 10xx).
+# Testado: GTX 1050 Ti, driver 580.173.02.
+-r requirements.txt
+nvidia-cublas-cu12==12.6.4.1
+nvidia-cudnn-cu12==9.10.2.21

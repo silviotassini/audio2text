@@ -1,0 +1,17 @@
+# Versões fixas para que a mesma entrada gere o mesmo resultado (reprodutibilidade)
+# e para evitar quebras por atualização (ex.: av>=19 é incompatível com faster-whisper 1.2.1).
+# Requer Python 3.11+.
+faster-whisper==1.2.1
+ctranslate2==4.8.2
+av==18.1.0
+onnxruntime==1.30.0
+tokenizers==0.23.2
+huggingface-hub==1.33.0
+tqdm==4.70.1
+colorama==0.4.6
+
+# Página web (audio2text.bat / audio2text.sh)
+fastapi==0.143.0
+starlette==1.7.0
+pydantic==2.14.0
+uvicorn==0.54.0

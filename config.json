@@ -1,0 +1,13 @@
+{
+  "default_model": "base",
+  "default_language": "auto",
+  "output_dir": null,
+  "log_enabled": false,
+  "log_file": "transcriber.log",
+  "verbose": false,
+  "timestamps": false,
+  "device": "auto",
+  "diarize": false,
+  "num_speakers": null,
+  "diarization_model": "pyannote/speaker-diarization-community-1"
+}

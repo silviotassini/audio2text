@@ -1,0 +1,122 @@
+AUDIO2TEXT 0.3.0 (VERSÃO LEVE) - VERSÃO DE TESTE
+Transcrição automática de áudio para apoio pericial
+=====================================================
+
+Esta é uma versão de TESTE. A transcrição é automática e PRECISA SER CONFERIDA com a
+gravação: o reconhecimento pode omitir falas ou gerar texto que não existe no áudio.
+
+Esta é a versão LEVE: funciona em qualquer computador, usando só o processador (CPU).
+Ela não identifica locutores e não usa placa de vídeo.
+
+
+1. O QUE VEM NESTE PACOTE
+-------------------------
+  instalar.bat                        instala a ferramenta no Docker (uma vez só)
+  config.txt                          onde você informa a pasta do caso
+  audio2text.bat                      abre a ferramenta no navegador (Windows)
+  audio2text.sh                       o mesmo, para Linux
+  transcrever.bat                     modo alternativo, pelo terminal (sem navegador)
+  audio2text-0.3.0-leve.tar.gz        a ferramenta, para instalar sem internet (só vem no
+                                      pacote sem internet; sem ele, o instalar.bat baixa
+                                      a ferramenta da internet)
+  RELATO_DE_TESTE.txt                 formulário para enviar suas impressões
+  SHA256SUMS.txt                      códigos para conferir a integridade dos arquivos
+
+
+2. REQUISITOS
+-------------
+  - Windows 10 ou 11, 64 bits
+  - 8 GB de memória RAM (16 GB recomendado)
+  - Espaço livre em disco: cerca de 5 GB
+  - Internet na instalação (exceto no pacote sem internet) e no primeiro uso de cada
+    modelo (o modelo é baixado e fica guardado)
+
+
+3. INSTALAÇÃO (UMA VEZ SÓ)
+--------------------------
+  Antes de tudo: se recebeu o pacote em .zip (e-mail, Teams, download), clique com o
+  botão direito no .zip > Propriedades > marque "Desbloquear" (no rodapé, em
+  Segurança) > OK. Só depois extraia. Assim o Windows não bloqueia os arquivos .bat.
+
+  a) Instale o Docker Desktop: https://www.docker.com/products/docker-desktop/
+     Na instalação, mantenha marcada a opção "Use WSL 2". Reinicie o computador se pedido.
+  b) Abra o Docker Desktop e espere aparecer "Engine running" (canto inferior esquerdo).
+  c) Dê dois cliques em instalar.bat e aguarde. Se a pasta tiver o arquivo
+     audio2text-0.3.0-leve.tar.gz, a instalação é feita a partir dele; senão, a
+     ferramenta é baixada da internet (cerca de 185 MB).
+
+
+4. COMO USAR
+------------
+  a) Abra o config.txt no Bloco de Notas e informe a pasta do caso, por exemplo:
+       PASTA_AUDIOS=D:\Pericias\Caso 123\Audios
+     Salve. A pasta do caso é aberta como SOMENTE LEITURA: a ferramenta não consegue
+     alterá-la. As subpastas também são lidas.
+  b) Dê dois cliques em audio2text.bat. Se o Docker Desktop estiver fechado, ele é aberto
+     automaticamente. O navegador abre a página da ferramenta.
+  c) Na página:
+       - escolha os áudios (os já transcritos aparecem com "ver"; na primeira abertura,
+         só os ainda não transcritos vêm marcados);
+       - escolha modelo, idioma, marcação de tempo;
+       - clique em "Iniciar transcrição" e acompanhe o andamento;
+       - clique em "ver" para ler uma transcrição, com os trechos de baixa confiança
+         destacados.
+  d) As transcrições ficam numa pasta AO LADO da pasta do caso, chamada
+     <nome da pasta>_transcricoes (ou na PASTA_TRANSCRICOES do config.txt). Exemplo:
+       D:\Pericias\Caso 123\Audios                 (áudios: não são alterados)
+       D:\Pericias\Caso 123\Audios_transcricoes    (transcrições e relatórios)
+  e) Ao terminar, clique em "Encerrar" na página.
+
+  Para outro caso, troque a PASTA_AUDIOS no config.txt (com a ferramenta encerrada) ou
+  arraste a pasta do caso sobre o audio2text.bat para usá-la só daquela vez.
+
+  A ferramenta só funciona com pastas deste computador (discos internos ou externos).
+  Pastas de rede (\\servidor\... ou unidades como Z:) não funcionam: copie os áudios.
+
+  Na primeira vez que usar cada modelo, ele é baixado da internet (base: 150 MB,
+  turbo: 1,6 GB, large-v3: 3 GB). Depois funciona sem internet.
+
+  Sugestão de modelo: "turbo" para laudos; "base" para triagem rápida. Na CPU, os
+  modelos maiores são lentos (podem levar mais tempo que a duração do áudio).
+
+  Modo terminal (alternativo): arraste a pasta com os áudios sobre o transcrever.bat. Um
+  menu aparece no terminal; ajuste as opções e tecle I para iniciar.
+
+
+5. COMO LER O RESULTADO
+-----------------------
+  - Cada áudio gera um .txt com o mesmo nome (exemplo: conversa.mp3 -> conversa.mp3.txt).
+  - O cabeçalho registra arquivo, duração, modelo, versão, idioma, dispositivo e data.
+  - [?? texto ??]  trecho de BAIXA CONFIANÇA: confira com atenção redobrada no áudio.
+  - [Nenhuma fala detectada]  o modelo não encontrou fala no arquivo.
+  - Nada é sobrescrito: se transcrever de novo, o novo arquivo sai como _2, _3...
+  - Os áudios são montados como SOMENTE LEITURA: a ferramenta não consegue alterá-los.
+  - O cabeçalho traz o SHA-256 do áudio e a data com o fuso horário, ex.: (UTC-03:00).
+  - Cada transcrição feita pela página gera também um relatorio_<data>.csv, que abre no
+    Excel, com o SHA-256 de cada áudio e de cada transcrição: confira com o hash do
+    material original e anexe ao laudo se quiser.
+
+
+6. PROBLEMAS COMUNS
+-------------------
+  "O Windows protegeu o computador" clique em "Mais informações" e depois em
+                                     "Executar assim mesmo". Para não ver mais o aviso,
+                                     desbloqueie o .zip antes de extrair (seção 3).
+  "O Docker não está em execução"   abra o Docker Desktop e espere "Engine running".
+  "Nenhuma imagem ... instalada"     execute instalar.bat.
+  "Não foi possível baixar a imagem" verifique a internet; se a rede bloquear o Docker
+                                     Hub, peça o pacote sem internet (com o .tar.gz).
+  "Não foi possível criar a pasta de saída"
+                                     a pasta dos áudios está num local sem permissão de
+                                     gravação (ex.: DVD); informe outra pasta de saída.
+  Transcrição muito lenta            use um modelo menor (base ou small).
+  Acentos estranhos na tela          use o Windows Terminal (já vem no Windows 11).
+
+
+7. SUAS IMPRESSÕES
+------------------
+  Preencha o RELATO_DE_TESTE.txt e envie para o responsável pelo teste.
+  NÃO envie áudios nem trechos de transcrições de casos reais.
+
+
+Créditos: transcrição com Whisper (OpenAI) via faster-whisper.
